@@ -9,6 +9,7 @@
 .dots/id_rsa.pub
 .dots/ipv4
 .dots/ansible/*
+.dots/dots_repo
 
 # .tfstate files
 *.tfstate
