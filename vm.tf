@@ -50,7 +50,7 @@ resource "proxmox_vm_qemu" "dev" {
     inline = [
       "date",
       # Sleep 60 seconds to allow system update
-      "sleep 60"
+      "sleep 120"
     ]
   }
 
