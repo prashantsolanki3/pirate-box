@@ -76,11 +76,6 @@ variable "ipv4" {
   default     = "10.2.21.12"
 }
 
-variable "ipv4_data" {
-  description = "The ipv4 data network"
-  type        = string
-  default     = "10.2.21.12"
-}
 
 variable "disk_size" {
   description = "Disk size"
