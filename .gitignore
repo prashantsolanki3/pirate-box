@@ -11,7 +11,7 @@
 .dots/ansible
 .dots/ansible/
 .dots/ansible/*
-.dots/dots_repo
+.dots/*_repo
 
 # .tfstate files
 *.tfstate
