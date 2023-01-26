@@ -35,3 +35,12 @@ resource "local_file" "dots_repo" {
   )
   filename = "./.dots/dots_repo"
 }
+
+resource "local_file" "doclab_repo" {
+  content = templatefile("${path.module}/templates/git_repo.tpl",
+    {
+      git_repo  = var.doclab_repo
+    }
+  )
+  filename = "./.dots/doclab_repo"
+}

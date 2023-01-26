@@ -94,3 +94,9 @@ variable "dots_ansible_repo" {
   type = string
   default = "local"
 }
+
+variable "doclab_repo" {
+  description = "Point to doclab repo"
+  type = string
+  default = "https://github.com/prashantsolanki3/doclab.git"
+}
