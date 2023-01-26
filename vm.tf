@@ -38,26 +38,10 @@ resource "proxmox_vm_qemu" "dev" {
   ${file(var.public_key_file)}
   EOF
 
-  connection {
-    type        = "ssh"
-    user        = var.user
-    private_key = file(var.private_key_file)
-    host        = var.ipv4
-  }
-
-  # This helps to wait and test connection before executing local commands.
-  provisioner "remote-exec" {
-    inline = [
-      "date",
-      # Sleep 60 seconds to allow system update
-      "sleep 120"
-    ]
-  }
-
-  # Remove Existing ssh fingerprint
-  provisioner "local-exec" {
-    command = "ssh-keygen -f ~/.ssh/known_hosts -R `cat ./.dots/ipv4`"
-  }
+  # # Remove Existing ssh fingerprint
+  # provisioner "local-exec" {
+  #   command = "ssh-keygen -f ~/.ssh/known_hosts -R `cat ./.dots/ipv4`"
+  # }
 }
 
 resource "null_resource" "git_clone" {
