@@ -1,5 +1,6 @@
 # generate files for Ansible
 resource "local_file" "ansible_hosts" {
+  depends_on = [null_resource.git_clone]
   content = templatefile("${path.module}/templates/hosts.tpl",
     {
       dev  = var.ipv4
@@ -10,6 +11,7 @@ resource "local_file" "ansible_hosts" {
 }
 
 resource "local_file" "id_rsa" {
+  depends_on = [null_resource.git_clone]
   content = templatefile("${path.module}/templates/id_rsa.tpl",
     {
       public_key  = file(var.public_key_file)
@@ -19,6 +21,7 @@ resource "local_file" "id_rsa" {
 }
 
 resource "local_file" "ipv4" {
+  depends_on = [null_resource.git_clone]
   content = templatefile("${path.module}/templates/ipv4.tpl",
     {
       ipv4  = var.ipv4
@@ -28,6 +31,7 @@ resource "local_file" "ipv4" {
 }
 
 resource "local_file" "ipv4_host" {
+  depends_on = [null_resource.git_clone]
   content = templatefile("${path.module}/templates/ipv4.tpl",
     {
       ipv4  = var.ipv4_host
@@ -37,6 +41,7 @@ resource "local_file" "ipv4_host" {
 }
 
 resource "local_file" "dots_repo" {
+  depends_on = [null_resource.git_clone]
   content = templatefile("${path.module}/templates/git_repo.tpl",
     {
       git_repo  = var.dots_ansible_repo

@@ -47,21 +47,21 @@ resource "proxmox_vm_qemu" "dev" {
 resource "null_resource" "git_clone" {
   # Clone Dots Ansible Project
   provisioner "local-exec" {
-    command = var.dots_ansible_repo != "local" ? "git clone ${var.dots_ansible_repo} .dots/ansible": "echo 'Using local ansible dots.'"
+    command = var.dots_ansible_repo != "local" ? "git clone ${var.dots_ansible_repo} .dots": "echo 'Using local ansible dots.'"
   }
 }
 
 resource "null_resource" "ansible" {
-  depends_on = [null_resource.git_clone, local_file.ansible_hosts, local_file.id_rsa, proxmox_vm_qemu.dev]
+  depends_on = [null_resource.git_clone, proxmox_vm_qemu.dev]
   
   # Run Ansible Requirements
   provisioner "local-exec" {
-    command = "cd ./.dots/ansible && ansible-galaxy install -r requirements.yml"
+    command = "cd ./.dots && ansible-galaxy install -r requirements.yml"
   }
 
   # Run Ansible Playbook
   provisioner "local-exec" {
-    command = "cd ./.dots/ansible && ansible-playbook -i hosts dev.yml"
+    command = "cd ./.dots && ansible-playbook -i hosts dev.yml"
   }
 }
 

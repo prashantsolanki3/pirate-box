@@ -5,14 +5,7 @@
 # Local .terraform directories
 **/.terraform/*
 
-.dots/hosts
-.dots/id_rsa.pub
-.dots/ipv4
-.dots/ipv4_host
-.dots/ansible
-.dots/ansible/
-.dots/ansible/*
-.dots/*_repo
+.dots/
 
 # .tfstate files
 *.tfstate
