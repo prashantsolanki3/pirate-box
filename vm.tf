@@ -53,6 +53,12 @@ resource "null_resource" "git_clone" {
 
 resource "null_resource" "ansible" {
   depends_on = [null_resource.git_clone, local_file.ansible_hosts, local_file.id_rsa, proxmox_vm_qemu.dev]
+  
+  # Run Ansible Requirements
+  provisioner "local-exec" {
+    command = "cd ./.dots && ansible-galaxy install -r requirements.yml"
+  }
+
   # Run Ansible Playbook
   provisioner "local-exec" {
     command = "cd ./.dots && ansible-playbook -i hosts ansible/dev.yml"
@@ -71,4 +77,24 @@ resource "null_resource" "cleanup" {
     when = destroy
     command = "bash -x scripts/cleanup.sh"
   }
+}
+
+
+resource "null_resource" "dc-media" {
+  depends_on = [null_resource.ansible]
+ 
+  connection {
+    type        = "ssh"
+    user        = var.user
+    private_key = file(var.private_key_file)
+    host        = var.ipv4
+  }
+
+  # This helps to wait and test connection before executing local commands.
+  provisioner "remote-exec" {
+    inline = [
+      "cd ~/doclab/media"
+    ]
+  }
+ 
 }
