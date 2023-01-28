@@ -76,6 +76,11 @@ variable "ipv4" {
   default     = "10.2.21.12"
 }
 
+variable "ipv4_host" {
+  description = "The ipv4 for host"
+  type        = string
+  default     = "192.168.0.110"
+}
 
 variable "disk_size" {
   description = "Disk size"

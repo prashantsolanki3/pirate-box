@@ -27,6 +27,15 @@ resource "local_file" "ipv4" {
   filename = "./.dots/ipv4"
 }
 
+resource "local_file" "ipv4_host" {
+  content = templatefile("${path.module}/templates/ipv4.tpl",
+    {
+      ipv4  = var.ipv4_host
+    }
+  )
+  filename = "./.dots/ipv4_host"
+}
+
 resource "local_file" "dots_repo" {
   content = templatefile("${path.module}/templates/git_repo.tpl",
     {
