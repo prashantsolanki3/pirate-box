@@ -56,12 +56,12 @@ resource "null_resource" "ansible" {
   
   # Run Ansible Requirements
   provisioner "local-exec" {
-    command = "cd ./.dots && ansible-galaxy install -r requirements.yml"
+    command = "cd ./.dots/ansible && ansible-galaxy install -r requirements.yml"
   }
 
   # Run Ansible Playbook
   provisioner "local-exec" {
-    command = "cd ./.dots && ansible-playbook -i hosts ansible/dev.yml"
+    command = "cd ./.dots/ansible && ansible-playbook -i hosts dev.yml"
   }
 }
 
