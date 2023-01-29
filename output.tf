@@ -51,6 +51,7 @@ resource "local_file" "dots_repo" {
 }
 
 resource "local_file" "doclab_repo" {
+  depends_on = [null_resource.git_clone]
   content = templatefile("${path.module}/templates/git_repo.tpl",
     {
       git_repo  = var.doclab_repo
